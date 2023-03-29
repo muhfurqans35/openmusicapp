@@ -33,13 +33,15 @@ class SongsService {
       'SELECT id, title, performer FROM songs',
     );
 
-    if (title !== undefined) {
+    if (title !== undefined && performer !== undefined) {
+      result = await this._pool.query(
+        `SELECT id, title, performer FROM songs WHERE LOWER(title) LIKE '%${title}%' AND LOWER(performer) LIKE '%${performer}%'`,
+      );
+    } else if (title !== undefined) {
       result = await this._pool.query(
         `SELECT id, title, performer FROM songs WHERE LOWER(title) LIKE '%${title}%'`,
       );
-    }
-
-    if (performer !== undefined) {
+    } else if (performer !== undefined) {
       result = await this._pool.query(
         `SELECT id, title, performer FROM songs WHERE LOWER(performer) LIKE '%${performer}%'`,
       );
