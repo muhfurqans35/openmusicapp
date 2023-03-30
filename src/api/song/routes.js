@@ -3,32 +3,32 @@ const routes = (handler) => [
   {
     method: 'POST',
     path: '/songs',
-    handler: handler.postSongHandler,
+    handler: (request, h) => handler.postSongHandler(request, h),
   },
   // getSongsHandler mengembalikan "banyak" song.
   {
     method: 'GET',
     path: '/songs',
-    handler: handler.getSongsHandler,
+    handler: (request, h) => handler.getSongsHandler(request, h),
   },
   // getSongByIdHandler mengembalikan "satu" song.
   {
     method: 'GET',
     path: '/songs/{id}',
-    handler: handler.getSongByIdHandler,
+    handler: (request, h) => handler.getSongByIdHandler(request, h),
   },
 
   // putSongByIdHandler hanya menerima dan mengubah "satu" song.
   {
     method: 'PUT',
     path: '/songs/{id}',
-    handler: handler.putSongByIdHandler,
+    handler: (request, h) => handler.putSongByIdHandler(request, h),
   },
   // deleteSongByIdHandler menghapus "satu" song.
   {
     method: 'DELETE',
     path: '/songs/{id}',
-    handler: handler.deleteSongByIdHandler,
+    handler: (request, h) => handler.deleteSongByIdHandler(request, h),
   },
 ];
 
