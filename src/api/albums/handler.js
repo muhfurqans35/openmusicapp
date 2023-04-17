@@ -11,7 +11,7 @@ class AlbumsHandler {
 
     const response = h.response({
       status: 'success',
-      message: 'Catatan berhasil ditambahkan',
+      message: 'Album berhasil ditambahkan',
       data: {
         albumId,
       },
@@ -34,11 +34,20 @@ class AlbumsHandler {
     const { id } = request.params;
     const album = await this._service.getAlbumById(id);
     const songs = await this._service.getAlbumContainSong(id);
-    const getDetailAlbumContainSong = { ...album, songs };
+
     return {
       status: 'success',
       data: {
-        album: getDetailAlbumContainSong,
+        album: {
+          id: album.id,
+          name: album.name,
+          year: album.year,
+          songs: songs.map((song) => ({
+            id: song.id,
+            title: song.title,
+            performer: song.performer,
+          })),
+        },
       },
     };
   }
@@ -51,7 +60,7 @@ class AlbumsHandler {
 
     return {
       status: 'success',
-      message: 'Catatan berhasil diperbarui',
+      message: 'Album berhasil diperbarui',
     };
   }
 
@@ -61,7 +70,7 @@ class AlbumsHandler {
 
     return {
       status: 'success',
-      message: 'Catatan berhasil dihapus',
+      message: 'Album berhasil dihapus',
     };
   }
 }

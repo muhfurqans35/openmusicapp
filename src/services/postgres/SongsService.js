@@ -29,9 +29,7 @@ class SongsService {
   }
 
   async getSongs(title, performer) {
-    let result = await this._pool.query(
-      'SELECT id, title, performer FROM songs',
-    );
+    let result = await this._pool.query('SELECT id, title, performer FROM songs');
 
     if (title !== undefined && performer !== undefined) {
       result = await this._pool.query(
